@@ -1,0 +1,13 @@
+.svgPreview {
+  --size: var(--space-8);
+  width: var(--size);
+  height: var(--size);
+  flex: 0 0 auto;
+  padding: var(--space-1);
+}
+.svgPreview div,
+.svgPreview svg {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}

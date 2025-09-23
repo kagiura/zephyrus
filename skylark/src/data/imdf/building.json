@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "ba47cb8b-c4c2-4b11-8327-17b20b5c8d1b",
+      "type": "Feature",
+      "feature_type": "building",
+      "geometry": null,
+      "properties": {
+        "name": {
+          "en": "AS2"
+        },
+        "alt_name": null,
+        "category": "unspecified",
+        "restriction": null,
+        "display_point": {
+          "type": "Point",
+          "coordinates": [
+            103.7713838,
+            1.2951284
+          ]
+        },
+        "address_id": null
+      }
+    }
+  ]
+}

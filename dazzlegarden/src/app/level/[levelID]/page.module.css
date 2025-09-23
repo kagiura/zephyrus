@@ -1,0 +1,12 @@
+.amenityIcon {
+  border-radius: 50%;
+  background: var(--accent-a3);
+  color: var(--accent-9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+  --size: 1.75rem;
+  width: var(--size);
+  height: var(--size);
+}

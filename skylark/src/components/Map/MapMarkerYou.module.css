@@ -1,0 +1,10 @@
+
+.youMarker {
+	--size: 0.8rem;
+	width: var(--size);
+	height: var(--size);
+	background: hsl(227, 100%, 60%);
+	border-radius: 999px;
+	border: solid 3px white;
+	box-shadow: 0 0 3px 3px hsla(227, 100%, 60%, 0.2);
+}

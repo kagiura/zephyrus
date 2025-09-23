@@ -1,0 +1,39 @@
+.mapMarker {
+  --size: 0.75em;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background-color: #ffffff;
+  border-radius: 10%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border: solid 1.5px #0d8bfa;
+  cursor: crosshair;
+}
+
+.mapMarker:hover {
+  background-color: #0d8bfa;
+}
+
+.mapMarker.marker3 {
+  background-color: rgb(250, 224, 25);
+  cursor: grab;
+}
+
+.mapMarker.marker3:active {
+  cursor: grabbing;
+}
+
+.mapMarker.marker4 {
+  background-color: green;
+  /* rotation */
+  cursor: se-resize;
+  border-radius: 100%;
+}
+
+.mapMarker.marker5 {
+  background-color: rgb(136, 0, 255);
+  cursor: nesw-resize;
+  border-radius: 0;
+}

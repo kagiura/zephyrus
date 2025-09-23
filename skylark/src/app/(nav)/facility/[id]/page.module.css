@@ -1,0 +1,12 @@
+.shortName, .oppName {
+	flex: 1 0 0;
+}
+
+.oppIcon {
+	opacity: 0.75
+}
+
+.oppName {
+	text-align: right;
+}
+

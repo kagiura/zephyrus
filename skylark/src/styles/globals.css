@@ -1,0 +1,29 @@
+@import url("https://use.typekit.net/lqb5vep.css");
+
+body {
+
+	/* PWA enhancements */
+	-webkit-overflow-scrolling: touch;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+}
+
+:is(.dark, .dark-theme),
+:is(.dark, .dark-theme) :where(.radix-themes:not(.light, .light-theme)) {
+  --color-panel-translucent: #18191bd1;
+}
+
+
+html {
+}
+
+body {
+	background: black;
+	scroll-snap-type: y mandatory;
+}
+
+div.radix-themes {
+	font-family: dinosaur;
+	--default-font-family: dinosaur, -apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, 'Helvetica Neue', 'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
+	--heading-font-family: var(--default-font-family)
+}

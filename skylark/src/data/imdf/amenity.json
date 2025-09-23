@@ -1,0 +1,299 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "a639f283-c3b5-4ec4-9a5a-d94abef6a565",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7707871,
+          1.2952904
+        ]
+      },
+      "properties": {
+        "category": "stairs",
+        "accessibility": null,
+        "name": null,
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "8122631d-b124-4c8c-a777-e67eeacbd84f"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "4cdfe44f-c65f-43d1-b5d8-1491ca48b9d3",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7709358,
+          1.2953004
+        ]
+      },
+      "properties": {
+        "category": "service",
+        "accessibility": null,
+        "name": {
+          "en": "Fire Command Centre"
+        },
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "435ea347-c91c-4f44-9080-a5aa37ff7c8f"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "6d17a8b4-3a6d-4ba5-8797-f931f8a32014",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7710421,
+          1.2952652
+        ]
+      },
+      "properties": {
+        "category": "storage",
+        "accessibility": null,
+        "name": {
+          "en": "Cold Room"
+        },
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "4c101f0c-3b92-4f7a-a551-424fc84028e1"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "f968b071-8345-4763-b4af-6fa84c879377",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7714139,
+          1.295471
+        ]
+      },
+      "properties": {
+        "category": "amphitheater",
+        "accessibility": null,
+        "name": {
+          "en": "LT11"
+        },
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "6d972bcc-96ce-41dd-ba1e-8daa4a2eeabb"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "729851c5-908a-44f9-ae1f-a8e275be2016",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7713083,
+          1.2950909
+        ]
+      },
+      "properties": {
+        "category": "restroom.wheelchair",
+        "accessibility": null,
+        "name": null,
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "7a0a8c75-ba4e-47b4-840a-ea57fe5bcfbd"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "9691c49f-4954-4d46-bf2e-943de2456239",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.771303,
+          1.295075
+        ]
+      },
+      "properties": {
+        "category": "restroom.male",
+        "accessibility": null,
+        "name": null,
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "267047c8-d087-47fb-96c9-75eea4878164"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "ed2fcaf6-cbc2-4700-b3e6-351d95a1a356",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7712937,
+          1.2950462
+        ]
+      },
+      "properties": {
+        "category": "restroom.female",
+        "accessibility": null,
+        "name": null,
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "47da6b82-2150-44ff-aa6f-85fcd99a6aab"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "142b6615-ae4d-4633-a5cc-2fc402f514d0",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7713201,
+          1.2951499
+        ]
+      },
+      "properties": {
+        "category": "stairs",
+        "accessibility": null,
+        "name": null,
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "4ecee4ee-b5b9-46cf-8822-77fadba912f6"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "d416aacd-3365-41bc-af8b-4bfd2242ceeb",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7707923,
+          1.2952984
+        ]
+      },
+      "properties": {
+        "category": "stairs",
+        "accessibility": null,
+        "name": null,
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "76ebea27-0221-4df7-929e-cdbaaad98df9"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "fb81425d-9707-47fc-a4d5-b0779dab4d30",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7710279,
+          1.2951893
+        ]
+      },
+      "properties": {
+        "category": "stairs",
+        "accessibility": null,
+        "name": null,
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "5c793eac-f971-4541-bf87-6e9cb260d46e"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    },
+    {
+      "id": "89b95b5d-b443-46f6-8ef5-8cdafc9297fe",
+      "type": "Feature",
+      "feature_type": "amenity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7711397,
+          1.2951164
+        ]
+      },
+      "properties": {
+        "category": "seating",
+        "accessibility": null,
+        "name": {
+          "en": "Patio"
+        },
+        "alt_name": null,
+        "hours": null,
+        "phone": null,
+        "website": null,
+        "unit_ids": [
+          "d07e4668-3474-4796-9c17-935ca7752058"
+        ],
+        "address_id": null,
+        "correlation_id": null
+      }
+    }
+  ]
+}

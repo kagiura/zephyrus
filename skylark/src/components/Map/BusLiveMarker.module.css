@@ -1,0 +1,6 @@
+
+.busMarker {
+	position: relative;
+	z-index: 3;
+	filter: drop-shadow(0 0 0.1rem var(--color-occupancy)) drop-shadow(0 0 0.5rem var(--color-occupancy));
+}

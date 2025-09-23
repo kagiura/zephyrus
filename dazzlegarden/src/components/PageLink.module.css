@@ -1,0 +1,6 @@
+.hover .icon {
+  background-color: var(--normal);
+}
+.hover:hover .icon {
+  background-color: var(--hover);
+}

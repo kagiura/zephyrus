@@ -1,0 +1,49 @@
+.svgPreview {
+  --size: var(--space-8);
+  width: var(--size);
+  height: var(--size);
+  flex: 0 0 auto;
+  padding: var(--space-1);
+}
+.svgPreview div,
+.svgPreview svg {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.dropzone {
+  height: 100%;
+}
+
+.dropzone::before {
+  box-sizing: border-box;
+  content: "";
+  position: absolute;
+  /* --margin: var(--space-3); */
+  --margin: 0px;
+  top: calc(var(--margin) / 2);
+  left: calc(var(--margin) / 2);
+  width: calc(100% - var(--margin));
+  height: calc(100% - var(--margin));
+  border-radius: var(--radius-4);
+
+  pointer-events: none;
+}
+.dropzone.focused::before {
+  border: solid 2px var(--accent-a8);
+  animation: pulsate 1.5s infinite;
+}
+
+/* pulsating border color animation */
+@keyframes pulsate {
+  0% {
+    border-color: var(--accent-a4);
+  }
+  50% {
+    border-color: var(--accent-a7);
+  }
+  100% {
+    border-color: var(--accent-a4);
+  }
+}

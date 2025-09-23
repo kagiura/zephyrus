@@ -1,0 +1,33 @@
+.dzgMarkerIcon :global(.dzg-marker-icon) {
+  width: 24px;
+  height: 24px;
+  background-color: #4284e7;
+  color: #fff;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease;
+}
+
+.dzgMarkerIcon :global(.dzg-marker-icon.active) {
+  transform: scale(1.1);
+  box-shadow: 0 0 1rem #e54666;
+}
+.dzgMarkerIcon :global(.dzg-marker-unit-number) {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  opacity: 0.5;
+  font-weight: 700;
+  font-size: 0.6rem;
+  text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+    rgb(255, 255, 255) 0.540302px 0.841471px 0px,
+    rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px,
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px,
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px,
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+}

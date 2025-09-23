@@ -1,0 +1,5 @@
+.map {
+  width: 100%;
+  flex: 1;
+  height: calc(100vh - var(--header-height));
+}

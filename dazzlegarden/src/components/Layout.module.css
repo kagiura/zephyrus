@@ -1,0 +1,48 @@
+.pageWrapper {
+  min-height: 100vh;
+  --header-height: 2.25rem;
+}
+.header {
+  background: var(--accent-9);
+  height: var(--header-height);
+  box-shadow: var(--shadow-5);
+}
+.logo {
+  height: 1.25rem;
+  margin-left: -0.1rem;
+  width: auto;
+  /* margin-top: var(--space-5); */
+}
+.page {
+  min-height: calc(100vh - var(--header-height));
+}
+
+.controls {
+  height: calc(100vh - var(--header-height));
+  flex: 1 0 40vw;
+  min-width: 300px;
+  max-width: 360px;
+  width: 40vw;
+  /* overflow: auto; */
+  box-shadow: var(--shadow-6);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+  }
+}
+
+.activePortal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}

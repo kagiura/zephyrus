@@ -1,0 +1,34 @@
+{
+	"ActiveBusResult": {
+		"TimeStamp": "2024-09-17T22:44:50+08:00",
+		"ActiveBusCount": "2",
+		"activebus": [
+			{
+				"vehplate": "PD577S",
+				"lat": 1.293888,
+				"lng": 103.769512,
+				"speed": 0,
+				"direction": 192.9,
+				"loadInfo": {
+					"occupancy": 0.011,
+					"crowdLevel": "low",
+					"capacity": 88,
+					"ridership": 1
+				}
+			},
+			{
+				"vehplate": "PD778D",
+				"lat": 1.29098,
+				"lng": 103.781192,
+				"speed": 0,
+				"direction": 240.6,
+				"loadInfo": {
+					"occupancy": 0.443,
+					"crowdLevel": "medium",
+					"capacity": 88,
+					"ridership": 39
+				}
+			}
+		]
+	}
+}

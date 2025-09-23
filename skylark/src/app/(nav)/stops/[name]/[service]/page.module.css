@@ -1,0 +1,70 @@
+.stopDetails {
+	position: relative;
+}
+
+.stopDot {
+	display: block;
+	--size: 0.6rem;
+	width: var(--size);
+	height: var(--size);
+	background: var(--color-panel);
+	border-radius: 999px;
+	border: solid 2.5px currentColor;
+	position: relative;
+	top: 0.5rem;
+	z-index: 5;
+}
+
+.stopLine {
+	content: "";
+	display: block;
+	height: 100%;
+	border-left: solid 2.5px currentColor;
+	border-radius: 999px;
+	position: absolute;
+	left: calc((0.6rem - 2.5px) / 2);
+	top: calc(0.5rem + 0.3rem);
+	z-index: 1;
+}
+
+.passed {
+	color: var(--gray-8);
+}
+
+.passed .stopDot {
+	border-color: var(--gray-7);
+	border-width: 2px;
+}
+.passed .stopLine {
+	border-color: var(--gray-7);
+	border-left-width: 2px;
+}
+
+/* .isEnd .stopDot {
+	border-radius: 2px;
+} */
+.isEnd .stopLine {
+	display: none;
+}
+
+.showAllStopsWrapper {
+	position: relative;
+}
+
+.showAllStopsWrapper .stopDot {
+	visibility: hidden;
+}
+.showAllStopsWrapper .stopLine {
+	border-right: none;
+	border-top: none;
+	border-bottom: none;
+	border-left-color: var(--gray-7);
+	border-left-width: 2px;
+	border-left-style: dotted;
+	border-radius: 0;
+}
+
+.shownAllStops .stopDot,
+.shownAllStops .stopLine {
+	visibility: hidden;
+}

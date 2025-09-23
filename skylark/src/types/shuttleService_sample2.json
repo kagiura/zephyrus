@@ -1,0 +1,109 @@
+{
+	"ShuttleServiceResult": {
+		"TimeStamp": "2024-09-17T22:43:31+08:00",
+		"hints": [
+			"[D2:201449]PD705P: ShuttleETA3-Vehicle-Job not match",
+			"[D2:201449]PD726D: Normal-Shuttle: passed stop Prince George's Park Foyer",
+			"[K:201475]PD629B: ShuttleETA3-Vehicle-Job not match"
+		],
+		"name": "PGPR",
+		"shuttles": [
+			{
+				"passengers": "-",
+				"name": "A2",
+				"_etas": [
+					{
+						"plate": "PD778D",
+						"px": "-",
+						"ts": "2024-09-17 22:30:00",
+						"jobid": 15486159,
+						"eta": 1,
+						"eta_s": 84
+					},
+					{
+						"plate": "PD577S",
+						"px": "-",
+						"ts": "2024-09-17 22:45:00",
+						"jobid": 15486160,
+						"eta": 15,
+						"eta_s": 884
+					},
+					{
+						"plate": "PD778D",
+						"px": "-",
+						"ts": "2024-09-17 23:00:00",
+						"jobid": 15486161,
+						"eta": 33,
+						"eta_s": 2003
+					}
+				],
+				"nextArrivalTime": "15",
+				"routeid": 90289,
+				"busstopcode": "PGPR",
+				"arrivalTime_veh_plate": "PD778D",
+				"arrivalTime": "1",
+				"nextPassengers": "-",
+				"nextArrivalTime_veh_plate": "PD577S"
+			},
+			{
+				"passengers": "-",
+				"name": "D2",
+				"_etas": [
+					{
+						"plate": "PD804L",
+						"px": "-",
+						"ts": "2024-09-17 22:33:00",
+						"jobid": 15485911,
+						"eta": 16,
+						"eta_s": 977
+					},
+					{
+						"plate": "PD705P",
+						"px": "-",
+						"ts": "2024-09-17 22:48:00",
+						"jobid": 15485912,
+						"eta": 24,
+						"eta_s": 1457
+					},
+					{
+						"plate": "PD726D",
+						"px": "-",
+						"ts": "2024-09-17 23:00:00",
+						"jobid": 15485913,
+						"eta": 41,
+						"eta_s": 2438
+					}
+				],
+				"nextArrivalTime": "24",
+				"routeid": 90295,
+				"busstopcode": "PGPR",
+				"arrivalTime_veh_plate": "PD804L",
+				"arrivalTime": "16",
+				"nextPassengers": "-",
+				"nextArrivalTime_veh_plate": "PD705P"
+			},
+			{
+				"passengers": "-",
+				"name": "K",
+				"_etas": [
+					{
+						"plate": "PD629B",
+						"px": "-",
+						"ts": "2024-09-17 23:04:00",
+						"jobid": 15486044,
+						"eta": 47,
+						"eta_s": 2810
+					}
+				],
+				"nextArrivalTime": "-",
+				"routeid": 90297,
+				"busstopcode": "PGPR",
+				"arrivalTime_veh_plate": "PD629B",
+				"arrivalTime": "47",
+				"nextPassengers": "-",
+				"nextArrivalTime_veh_plate": "-"
+			}
+		],
+		"caption": "Prince George's Park Foyer"
+	}
+}

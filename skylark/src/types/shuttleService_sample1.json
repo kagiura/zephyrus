@@ -1,0 +1,129 @@
+{
+	"ShuttleServiceResult": {
+		"TimeStamp": "2024-09-17T22:37:38+08:00",
+		"hints": [
+			"[A1:201361]PD516T: Normal-Shuttle: passed stop Kent Ridge MRT",
+			"[BTC:201394]PD564D: Normal-Shuttle: passed stop Kent Ridge MRT",
+			"[D2:201439]PD705P: ShuttleETA3-Vehicle-Job not match",
+			"[D2:201439]PD726D: Normal-Shuttle: passed stop Kent Ridge MRT",
+			"[K:201461]PD629B: ShuttleETA3-Vehicle-Job not match"
+		],
+		"name": "KR-MRT",
+		"shuttles": [
+			{
+				"passengers": "-",
+				"name": "D2",
+				"_etas": [
+					{
+						"plate": "PD804L",
+						"px": "-",
+						"ts": "2024-09-17 22:33:00",
+						"jobid": 15485911,
+						"eta": 3,
+						"eta_s": 175
+					},
+					{
+						"plate": "PD705P",
+						"px": "-",
+						"ts": "2024-09-17 22:48:00",
+						"jobid": 15485912,
+						"eta": 6,
+						"eta_s": 349
+					},
+					{
+						"plate": "PD726D",
+						"px": "-",
+						"ts": "2024-09-17 23:00:00",
+						"jobid": 15485913,
+						"eta": 28,
+						"eta_s": 1688
+					}
+				],
+				"nextArrivalTime": "6",
+				"routeid": 90295,
+				"busstopcode": "KR-MRT",
+				"arrivalTime_veh_plate": "PD804L",
+				"arrivalTime": "3",
+				"nextPassengers": "-",
+				"nextArrivalTime_veh_plate": "PD705P"
+			},
+			{
+				"passengers": "-",
+				"name": "A1",
+				"_etas": [
+					{
+						"plate": "PD576U",
+						"px": "-",
+						"ts": "2024-09-17 22:32:00",
+						"jobid": 15486280,
+						"eta": 6,
+						"eta_s": 347
+					},
+					{
+						"plate": "PD516T",
+						"px": "-",
+						"ts": "2024-09-17 22:47:00",
+						"jobid": 15486281,
+						"eta": 21,
+						"eta_s": 1234
+					},
+					{
+						"plate": "PD576U",
+						"px": "-",
+						"ts": "2024-09-17 23:00:00",
+						"jobid": 15486282,
+						"eta": 34,
+						"eta_s": 2015
+					}
+				],
+				"nextArrivalTime": "21",
+				"routeid": 90287,
+				"busstopcode": "KR-MRT",
+				"arrivalTime_veh_plate": "PD576U",
+				"arrivalTime": "6",
+				"nextPassengers": "-",
+				"nextArrivalTime_veh_plate": "PD516T"
+			},
+			{
+				"passengers": "-",
+				"name": "K",
+				"_etas": [
+					{
+						"plate": "PD629B",
+						"px": "-",
+						"ts": "2024-09-17 23:04:00",
+						"jobid": 15486044,
+						"eta": 29,
+						"eta_s": 1764
+					}
+				],
+				"nextArrivalTime": "-",
+				"routeid": 90297,
+				"busstopcode": "KR-MRT",
+				"arrivalTime_veh_plate": "PD629B",
+				"arrivalTime": "29",
+				"nextPassengers": "-",
+				"nextArrivalTime_veh_plate": "-"
+			},
+			{
+				"passengers": "-",
+				"name": "BTC",
+				"_etas": [],
+				"nextArrivalTime": "-",
+				"routeid": 90292,
+				"busstopcode": "KR-MRT",
+				"arrivalTime_veh_plate": "-",
+				"arrivalTime": "-",
+				"nextPassengers": "-",
+				"nextArrivalTime_veh_plate": "-"
+			},
+			{
+				"nextArrivalTime": "27",
+				"busstopcode": "KR-MRT",
+				"name": "PUB:95",
+				"arrivalTime": "12"
+			}
+		],
+		"caption": "Kent Ridge MRT"
+	}
+}

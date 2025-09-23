@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "8692f04c-cc49-42b1-b636-eb3fc895bba7",
+      "type": "Feature",
+      "feature_type": "address",
+      "geometry": null,
+      "properties": {
+        "address": "21 Lower Kent Ridge Road",
+        "unit": null,
+        "locality": "Singapore",
+        "province": "SG-01",
+        "country": "SG",
+        "postal_code": "119077",
+        "postal_code_ext": null,
+        "postal_code_vanity": null
+      }
+    }
+  ]
+}

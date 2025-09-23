@@ -1,0 +1,106 @@
+{
+	"name": "skylark",
+	"version": "0.1.0",
+	"license": "MIT",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"_comment": "to use the following command add type module to this file first",
+		"getGpx": "tsx src/scripts/getGpx.ts"
+	},
+	"dependencies": {
+		"@radix-ui/colors": "^3.0.0",
+		"@radix-ui/react-accordion": "^1.2.2",
+		"@radix-ui/react-icons": "^1.3.2",
+		"@radix-ui/themes": "^3.1.3",
+		"@tabler/icons-react": "^3.29.0",
+		"@turf/bezier-spline": "^7.2.0",
+		"@turf/boolean-point-in-polygon": "^7.2.0",
+		"@turf/clean-coords": "^7.2.0",
+		"@turf/helpers": "^7.2.0",
+		"@turf/point-on-feature": "^7.2.0",
+		"@turf/point-to-polygon-distance": "^7.2.0",
+		"@turf/simplify": "^7.2.0",
+		"@types/geojson": "^7946.0.14",
+		"@uidotdev/usehooks": "^2.4.1",
+		"chroma-js": "^3.1.2",
+		"clsx": "^2.1.1",
+		"date-fns": "^4.1.0",
+		"dazzlegarden": "workspace:*",
+		"eslint-plugin-prettier": "^5.2.3",
+		"fuse.js": "^7.1.0",
+		"geojson": "^0.5.0",
+		"geolib": "^3.3.4",
+		"mapbox-gl": "^3.6.0",
+		"motion": "^12.0.6",
+		"next": "14.1.1",
+		"next-pwa": "^5.6.0",
+		"next-themes": "^0.2.1",
+		"node-fetch": "^3.3.2",
+		"normalize.css": "^8.0.1",
+		"nusmoderator": "^3.0.0",
+		"radix-ui": "^1.1.2",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-map-gl": "^8.0.1",
+		"swr": "^2.2.5",
+		"to-smooth": "^2.2.0",
+		"usehooks-ts": "^3.1.0",
+		"valibot": "^0.42.0"
+	},
+	"devDependencies": {
+		"@types/chroma-js": "^3.1.1",
+		"@types/node": "^20.8.4",
+		"@types/react": "^18.2.28",
+		"autoprefixer": "^10.4.16",
+		"babel-loader": "^10.0.0",
+		"eslint": "^8.51.0",
+		"eslint-config-next": "^13.5.4",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-unused-imports": "^4.1.4",
+		"postcss": "^8.4.31",
+		"prettier": "^3.5.1",
+		"typescript": "^5.7.3"
+	},
+	"eslintConfig": {
+		"extends": [
+			"next/core-web-vitals",
+			"prettier"
+		],
+		"plugins": [
+			"unused-imports",
+			"prettier"
+		],
+		"rules": {
+			"prettier/prettier": [
+				"warn"
+			],
+			"no-nested-ternary": [
+				"off"
+			],
+			"react/self-closing-comp": [
+				"warn"
+			],
+			"react/jsx-props-no-spreading": [
+				"off"
+			],
+			"import/order": [
+				"warn",
+				{
+					"newlines-between": "always"
+				}
+			],
+			"import/first": [
+				"warn"
+			],
+			"@next/next/no-page-custom-font": "off",
+			"@typescript-eslint/no-unused-vars": "off",
+			"unused-imports/no-unused-imports": "warn",
+			"react/jsx-key": "warn"
+		}
+	},
+	"_comment": "Add empty prettier key in order to override code editor settings while applying all Prettier defaults",
+	"prettier": {}
+}
