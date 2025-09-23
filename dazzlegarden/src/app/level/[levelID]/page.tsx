@@ -29,6 +29,7 @@ import { MultiPolygon, Position } from "geojson";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 
+import { newImdfCategories } from "@/data/newImdfCategories";
 import { getTouchingBorders } from "@/utils/turf";
 import cleanCoords from "@turf/clean-coords";
 import { feature, multiPolygon } from "@turf/helpers";
@@ -367,39 +368,45 @@ export default function Page() {
         Amenities
       </Text>
       <Flex direction="column" gap="3">
-        {amenities.map((amenity) => (
-          <NextLink
-            href={`/level/${level.id}/amenity/${amenity.id}`}
-            key={amenity.id}
-          >
-            <Box>
-              <Flex gap="3">
-                <Box className={styles.amenityIcon}>
-                  <i
-                    className={`ti ti-${
-                      IMDF_AMENITY_ICONS[
-                        amenity.imdfAmenity.properties.category ||
-                          AMENITY_CATEGORY.unspecified
-                      ]
-                    }`}
-                  />
-                </Box>
-                <Flex direction="column">
-                  <Text size="2">
-                    {amenity.imdfAmenity.properties.name?.en ||
-                      "Untitled Amenity"}
-                  </Text>
-                  <Text size="1" color="gray">
-                    <i>
-                      {amenity.imdfAmenity.properties.category ||
-                        "Unknown Category"}
-                    </i>
-                  </Text>
+        {amenities.map((amenity) => {
+          const Icon = newImdfCategories.find(
+            (c) => c.category === amenity.imdfAmenity.properties.category
+          )?.icon;
+          return (
+            <NextLink
+              href={`/level/${level.id}/amenity/${amenity.id}`}
+              key={amenity.id}
+            >
+              <Box>
+                <Flex gap="3">
+                  <Box className={styles.amenityIcon}>
+                    {/* <i
+                      className={`ti ti-${
+                        IMDF_AMENITY_ICONS[
+                          amenity.imdfAmenity.properties.category ||
+                            AMENITY_CATEGORY.unspecified
+                        ]
+                      }`}
+                    /> */}
+                    {Icon && <Icon />}
+                  </Box>
+                  <Flex direction="column">
+                    <Text size="2">
+                      {amenity.imdfAmenity.properties.name?.en ||
+                        "Untitled Amenity"}
+                    </Text>
+                    <Text size="1" color="gray">
+                      <i>
+                        {amenity.imdfAmenity.properties.category ||
+                          "Unknown Category"}
+                      </i>
+                    </Text>
+                  </Flex>
                 </Flex>
-              </Flex>
-            </Box>
-          </NextLink>
-        ))}
+              </Box>
+            </NextLink>
+          );
+        })}
       </Flex>
       <Button
         variant="surface"

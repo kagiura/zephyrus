@@ -14,11 +14,12 @@ import { MapContext, SVGDimensions } from "@/utils/useMap";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { useMap } from "react-leaflet";
+import DzgExportImport from "./DzgExportImport";
 import DzgLogo from "./DzgLogo";
+import IMDFExport from "./IMDFExport";
+import IMDFImport from "./IMDFImport";
 import { MapPortalContext, Node } from "./MapPortal";
 import SVGEditorPanel from "./SVGEditorPanel";
-import IMDFExport from "./IMDFExport";
-import DzgExportImport from "./DzgExportImport";
 
 const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
   ssr: false,
@@ -46,7 +47,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
       setLayers,
       mapLoaded,
     }),
-    [mapRef, dimensions, layers, mapLoaded],
+    [mapRef, dimensions, layers, mapLoaded]
   );
 
   return (
@@ -59,6 +60,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
 
               <Box style={{ flex: 1 }} />
               <DzgExportImport />
+              <IMDFImport />
               <IMDFExport />
               <SVGEditorPanel>
                 <Button size="2">Place SVG</Button>

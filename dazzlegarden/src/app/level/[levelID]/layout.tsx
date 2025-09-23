@@ -27,6 +27,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { GeoJSON, Marker, useMapEvents } from "react-leaflet";
 
+import { newImdfCategories } from "@/data/newImdfCategories";
 import { area } from "@turf/area";
 import { multiPolygon, polygon } from "@turf/helpers";
 import styles from "./layout.module.css";
@@ -307,6 +308,20 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             poi.type === "amenity"
               ? poi.imdfAmenity.geometry.coordinates
               : poi.imdfAnchor.geometry.coordinates;
+
+          const icon =
+            poi.type === "amenity"
+              ? (
+                  newImdfCategories.find(
+                    (c) => c.category === poi.imdfAmenity.properties.category
+                  )?.icon.displayName || "question"
+                )
+                  // if icon is pascal case, convert to kebab case
+                  .replace(/([a-z])([A-Z0-9])/g, "$1-$2")
+                  .replace(/([0-9])([A-Z])/g, "$1-$2")
+                  .toLowerCase()
+              : IMDF_OCCUPANT_ICONS[poi.imdfOccupant.properties.category];
+          console.log("POI icon", poi, icon);
           return (
             <Marker
               key={poi.id}
@@ -325,11 +340,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
                 html: `<div class="dzg-marker-icon dzg-marker-${poi.type} ${
                   // active
                   open?.id === poi.id ? "active" : ""
-                }"><i class="ti ti-${
-                  poi.type === "amenity"
-                    ? IMDF_AMENITY_ICONS[poi.imdfAmenity.properties.category]
-                    : IMDF_OCCUPANT_ICONS[poi.imdfOccupant.properties.category]
-                }"></i></div>`,
+                }"><i class="ti ti-${icon}"></i></div>`,
                 iconSize: [24, 24],
               })}
               pane={DzgLeafletPanes.markers}

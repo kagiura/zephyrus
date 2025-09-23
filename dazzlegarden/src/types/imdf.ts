@@ -6,9 +6,9 @@ import {
   Feature as GeoJsonFeature,
   Geometry,
   LineString,
+  MultiPolygon,
   Point,
   Polygon,
-  MultiPolygon,
 } from "geojson";
 
 export type Polygonal = Polygon | MultiPolygon;
@@ -49,6 +49,8 @@ export enum FeatureType {
   "unit" = "unit",
   "venue" = "venue",
 }
+
+export const FEATURE_TYPES = Object.values(FeatureType);
 
 export interface Labels {
   [key: string]: string; // ToDo Restrict key to lang shortnames
