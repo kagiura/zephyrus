@@ -12,7 +12,9 @@ import useDzg from "@/utils/useDzg";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import {
   Box,
+  Button,
   Card,
+  DropdownMenu,
   Flex,
   IconButton,
   Inset,
@@ -146,7 +148,7 @@ function Unit({
             pane={DzgLeafletPanes.unitsHighlighted}
           />
         )}
-        <Marker
+        {/* <Marker
           position={[labelPosition[1], labelPosition[0]]}
           icon={divIcon({
             className: styles.dzgMarkerIcon,
@@ -168,7 +170,7 @@ function Unit({
             },
           }}
           pane={DzgLeafletPanes.unitNumbers}
-        />
+        /> */}
       </MapPortal>
     </>
   );
@@ -273,11 +275,70 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
     <div>
       <BackButton />
       <Title
-        title={`Level ${
+        title={
           level.imdfLevel.properties.alt_name?.en ||
           level.imdfLevel.properties.name?.en
-        }`}
-      />
+        }
+        description={
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <Button variant="ghost" color="gray">
+                <Text weight="medium" color="gray">
+                  {`${level.imdfLevel.properties.ordinal}${
+                    level.imdfLevel.properties.ordinal === 1
+                      ? "st"
+                      : level.imdfLevel.properties.ordinal === 2
+                        ? "nd"
+                        : level.imdfLevel.properties.ordinal === 3
+                          ? "rd"
+                          : "th"
+                  } Floor (Ordinal)`}
+                </Text>
+                <DropdownMenu.TriggerIcon />
+              </Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              {dzg.levels
+                .filter(
+                  (l) =>
+                    // l.id !== level.id &&
+                    l.imdfLevel.properties.building_ids?.length === 0 ||
+                    l.imdfLevel.properties.building_ids === null ||
+                    !dzg.buildings.some((b) =>
+                      l.imdfLevel.properties.building_ids?.includes(
+                        b.imdfBuilding.id
+                      )
+                    ) ||
+                    (level.imdfLevel.properties.building_ids &&
+                      l.imdfLevel.properties.building_ids &&
+                      level.imdfLevel.properties.building_ids.some((id) =>
+                        l.imdfLevel.properties.building_ids?.includes(id)
+                      ))
+                )
+                .sort((a, b) => {
+                  return (
+                    (b.imdfLevel.properties.ordinal || 0) -
+                    (a.imdfLevel.properties.ordinal || 0)
+                  );
+                })
+                .map((l) => (
+                  <DropdownMenu.Item
+                    key={l.id}
+                    onSelect={() => {
+                      router.push(`/level/${l.id}`);
+                    }}
+                  >
+                    {l.imdfLevel.properties.ordinal}
+                    {" – "}
+                    {l.imdfLevel.properties.alt_name?.en ||
+                      l.imdfLevel.properties.name?.en ||
+                      "Unnamed Level " + l.id.slice(0, 6)}
+                  </DropdownMenu.Item>
+                ))}
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+        }
+      ></Title>
       {level.imdfLevel.geometry.coordinates.length > 0 && (
         <MapPortal id={level.id}>
           <GeoJSON

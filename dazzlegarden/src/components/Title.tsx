@@ -16,7 +16,7 @@ function Title({
         {title}
       </Heading>
       {description && (
-        <Heading as="h2" size="3">
+        <Heading as="h2" size="3" weight="medium" mt="1" color="gray">
           {description}
         </Heading>
       )}
