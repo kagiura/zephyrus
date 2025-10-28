@@ -125,6 +125,7 @@ export default function ServiceDetails() {
 
 		return (
 			timings.shuttles
+				.filter((s) => !s.busstopcode.endsWith("-E")) // filter out terminating svcs
 				.find((s) => s.name === service?.name)
 				?._etas?.map((eta) => ({
 					plate: eta.plate,
@@ -152,8 +153,6 @@ export default function ServiceDetails() {
 	if (timingsQuery.updating || timingsQuery.error) return <div>Error</div>;
 
 	const { timings } = timingsQuery;
-	const serviceTimings =
-		timings.shuttles.find((s) => s.name === service?.name)?._etas || [];
 
 	if (!service) {
 		return <div>Invalid service name</div>;
@@ -339,99 +338,104 @@ function ServiceStop({
 					</NextLink>
 				</Reset>
 			</Flex>
-			<Text>
-				<StopTimingsProvider
-					key={stop.name}
-					stopName={stop.name}
-					loading={<></>}
-				>
-					{({ stop, timings, updatedTime }) => {
-						const trips = timings.shuttles
-							.find(
-								(s) =>
-									s.name === service?.name &&
-									(isEnd
-										? isK || s.busstopcode.includes("-E")
-										: isStart
-											? isK || s.busstopcode.includes("-S")
-											: true),
-							)
-							?._etas?.filter((eta) => eta.plate === selectedTrip?.plate)
-							.filter((eta) =>
-								// eta_time must be after this trip's start time
-								{
-									const selectedTripStartTime = new Date(selectedTrip?.ts || 0);
+			{!passed && (
+				<Text>
+					<StopTimingsProvider
+						key={stop.name}
+						stopName={stop.name}
+						loading={<></>}
+					>
+						{({ stop, timings, updatedTime }) => {
+							const trips = timings.shuttles
+								.find(
+									(s) =>
+										s.name === service?.name &&
+										(isEnd
+											? isK || s.busstopcode.includes("-E")
+											: isStart
+												? isK || s.busstopcode.includes("-S")
+												: true),
+								)
+								?._etas?.filter((eta) => eta.plate === selectedTrip?.plate)
+								.filter((eta) =>
+									// eta_time must be after this trip's start time
+									{
+										const selectedTripStartTime = new Date(
+											selectedTrip?.ts || 0,
+										);
 
-									const etaTime = eta.eta_time;
-									const etaStartTime = new Date(eta.ts);
-									const startAtSameTime =
-										selectedTripStartTime.getTime() === etaStartTime.getTime();
-									const startAfter =
-										etaStartTime.getTime() > selectedTripStartTime.getTime();
-									// if (stop.name === "MUSEUM") {
-									// 	console.log(
-									// 		"trips",
-									// 		// etaTime,
-									// 		etaStartTime,
-									// 		selectedTripStartTime,
-									// 		// ">",
-									// 		// etaTime >= selectedTripStartTime,
-									// 		// "startAtSameTime",
-									// 		startAtSameTime,
-									// 		// startAfter,
-									// 		// ">",
-									// 		// isE && isEnd ? startAfter : startAtSameTime,
-									// 	);
-									// }
-									// TODO: ok i figured it out . please refactor this so it works even when youre not in SGT :sob:
-									return (
-										etaTime >= selectedTripStartTime &&
-										(isE && isEnd ? startAfter : startAtSameTime)
-									);
-								},
-							);
+										const etaTime = eta.eta_time;
+										const etaStartTime = new Date(eta.ts);
+										const startAtSameTime =
+											selectedTripStartTime.getTime() ===
+											etaStartTime.getTime();
+										const startAfter =
+											etaStartTime.getTime() > selectedTripStartTime.getTime();
+										// if (stop.name === "MUSEUM") {
+										// 	console.log(
+										// 		"trips",
+										// 		// etaTime,
+										// 		etaStartTime,
+										// 		selectedTripStartTime,
+										// 		// ">",
+										// 		// etaTime >= selectedTripStartTime,
+										// 		// "startAtSameTime",
+										// 		startAtSameTime,
+										// 		// startAfter,
+										// 		// ">",
+										// 		// isE && isEnd ? startAfter : startAtSameTime,
+										// 	);
+										// }
+										// TODO: ok i figured it out . please refactor this so it works even when youre not in SGT :sob:
+										return (
+											etaTime >= selectedTripStartTime &&
+											(isE && isEnd ? startAfter : startAtSameTime)
+										);
+									},
+								);
 
-						const trip = trips?.[0];
-						if (stop.name === "MUSEUM") {
-							console.log(
-								timings.shuttles,
-								service.name,
-								stop.name,
-								selectedTrip,
-							);
-						}
-						if (!trip) {
+							const trip = trips?.[0];
+							if (stop.name === "MUSEUM") {
+								console.log(
+									timings.shuttles,
+									service.name,
+									stop.name,
+									selectedTrip,
+								);
+							}
+							if (!trip) {
+								return (
+									<>
+										{/* test */}
+										{/* {/* test */}
+										{/* {JSON.stringify(timings.shuttles, undefined, 2)} */}
+									</>
+								);
+								return <></>;
+							}
+
 							return (
+								// {/* <br /> */}
 								<>
-									{/* test */}
-									{/* {/* test */}
-									{/* {JSON.stringify(timings.shuttles, undefined, 2)} */}
-								</>
-							);
-							return <></>;
-						}
-
-						return (
-							// {/* <br /> */}
-							<>
-								{/* testt
+									{/* testt
 								{JSON.stringify(trips, undefined, 2)} */}
-								{trip.eta_time.toLocaleTimeString("en-US", {
-									hour: "2-digit",
-									minute: "2-digit",
-									hour12: false,
-								})}
-								<br />
-							</>
-							// {/* {JSON.stringify(updatedTime, undefined, 2)} */}
-							// {/* {JSON.stringify(trip?.map((t) => t.eta_time), undefined, 2)} */}
-							// {/* ——————{trip?.eta} */}
-							// {/* {JSON.stringify(trip)} */}
-							// {/* {JSON.stringify(timings.shuttles, undefined, 2)} */}
-						);
-					}}
-				</StopTimingsProvider>
-			</Text>
+									{trip.eta_time.toLocaleTimeString("en-US", {
+										hour: "2-digit",
+										minute: "2-digit",
+										hour12: false,
+									})}
+									<br />
+								</>
+								// {/* {JSON.stringify(updatedTime, undefined, 2)} */}
+								// {/* {JSON.stringify(trip?.map((t) => t.eta_time), undefined, 2)} */}
+								// {/* ——————{trip?.eta} */}
+								// {/* {JSON.stringify(trip)} */}
+								// {/* {JSON.stringify(timings.shuttles, undefined, 2)} */}
+							);
+						}}
+					</StopTimingsProvider>
+				</Text>
+			)}
 		</Flex>
 	);
 }

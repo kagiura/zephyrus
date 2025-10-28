@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
 import { Box, Reset, Text, TextProps } from "@radix-ui/themes";
 import { IconRefresh } from "@tabler/icons-react";
+import clsx from "clsx";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useDebounceValue, useInterval } from "usehooks-ts";
 import { InferOutput } from "valibot";
-import clsx from "clsx";
-import Link from "next/link";
 
 import styles from "./StopTimings.module.css";
 
 import isbServices from "@/data/isbServices";
+import isbStops from "@/data/isbStops";
 import { ShuttleServiceResultSchema } from "@/types/schema";
 import { getISBPositionsAll, getISBTimings } from "@/utils/api";
-import isbStops from "@/data/isbStops";
 
 // TEMPORARY
 type ISBStop = (typeof isbStops)[number];
@@ -116,6 +116,7 @@ export default function StopTimings({
 		<>
 			<Box className={styles.timingsWrapper}>
 				{timings.shuttles
+					.filter((s) => !s.busstopcode.endsWith("-E")) // filter out terminating svcs
 					.sort((a, b) => {
 						// sort in the same order as isbServices
 						const aIndex = isbServices.findIndex((s) => s.name === a.name);
