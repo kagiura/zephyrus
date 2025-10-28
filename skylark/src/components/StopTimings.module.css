@@ -137,7 +137,7 @@
 
 .serviceETA {
 	flex: 0 0 auto;
-	width: 5.5ch;
+	/* width: 8ch; */
 	text-align: right;
 	margin-top: 0.25rem;
 }
