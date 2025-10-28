@@ -19,8 +19,8 @@ export default function CampusSearchResults({
 	return (
 		<>
 			<Text size="1" color="gray" mt="3" mb="2" as="p">
-				{results.length} result{results.length > 1 ? "s" : ""} for "
-				{searchQuery}"
+				{results.length} result{results.length > 1 ? "s" : ""} for &quot;
+				{searchQuery}&quot;
 			</Text>
 			<Flex direction="column">
 				{results.map(({ item }, i) => {
