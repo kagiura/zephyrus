@@ -12,7 +12,7 @@ import { useMapState } from "@/utils/mapState";
 import { AMENITY_CATEGORY } from "@dazzlegarden/types/imdf";
 import pointOnFeature from "@turf/point-on-feature";
 
-export default function Facility({ children }: { children: React.ReactNode }) {
+export default function Facility() {
 	const { id } = useParams();
 	const {
 		flyTo,

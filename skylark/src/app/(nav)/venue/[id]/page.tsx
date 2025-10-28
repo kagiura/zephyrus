@@ -11,7 +11,7 @@ import { IMDF_LEVELS, IMDF_UNITS } from "@/data/imdf";
 import { useMapState } from "@/utils/mapState";
 import pointOnFeature from "@turf/point-on-feature";
 
-export default function Venue({ children }: { children: React.ReactNode }) {
+export default function Venue() {
 	const { id } = useParams();
 	const {
 		flyTo,
