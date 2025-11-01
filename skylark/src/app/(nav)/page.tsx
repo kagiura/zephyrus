@@ -2,6 +2,7 @@
 import { TextField } from "@radix-ui/themes";
 
 import CampusSearchResults from "@/components/CampusSearchResults";
+import ClosestBuilding from "@/components/ClosestBuilding";
 import ClosestStops from "@/components/ClosestStops";
 import { useState } from "react";
 
@@ -19,6 +20,7 @@ export default function Page() {
 				<CampusSearchResults searchQuery={searchQuery} />
 			) : (
 				<>
+					<ClosestBuilding />
 					<ClosestStops />
 				</>
 			)}

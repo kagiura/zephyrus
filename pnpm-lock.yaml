@@ -264,6 +264,9 @@ importers:
       '@turf/clean-coords':
         specifier: ^7.2.0
         version: 7.2.0
+      '@turf/distance':
+        specifier: ^7.2.0
+        version: 7.2.0
       '@turf/helpers':
         specifier: ^7.2.0
         version: 7.2.0

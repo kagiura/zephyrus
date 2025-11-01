@@ -9,6 +9,7 @@ import StopTimings from "./StopTimings";
 
 import { DEFAULT_LAT, DEFAULT_LNG } from "@/data/geographicDefaults";
 import { ISBStop } from "@/types/schema";
+import formatDistance from "@/utils/formatDistance";
 import getClosestStops from "@/utils/getClosestStops";
 
 const IT_LAT = 1.29731;
@@ -68,9 +69,7 @@ export default function ClosestStops() {
 												{stop.LongName}
 											</Text>
 											<Badge size="1" color="gray">
-												{stop.distance > 300
-													? `${(stop.distance / 1000).toFixed(1)}km`
-													: `${stop.distance.toFixed(0)}m`}
+												{formatDistance(stop.distance)}
 											</Badge>
 										</Box>
 									</Inset>

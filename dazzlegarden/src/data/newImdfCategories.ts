@@ -54,6 +54,7 @@ import {
   IconWifi,
   IconYoga,
 } from "@tabler/icons-react";
+import { RadixColor } from "./radix";
 
 export const newImdfCategories = [
   {
@@ -1411,6 +1412,90 @@ export const newImdfCategories = [
     subcategory: "wellbeing",
   },
 ];
+
+export const newImdfCategoriesColors: {
+  subcategory: string;
+  color: RadixColor;
+}[] = [
+  {
+    subcategory: "emergency",
+    color: "red",
+  },
+  {
+    subcategory: "fnb",
+    color: "yellow",
+  },
+  {
+    subcategory: "generic",
+    color: "gray",
+  },
+  {
+    subcategory: "mobility",
+    color: "cyan",
+  },
+  {
+    subcategory: "restroom",
+    color: "violet",
+  },
+  {
+    subcategory: "service",
+    color: "indigo",
+  },
+  {
+    subcategory: "sports",
+    color: "grass",
+  },
+  {
+    subcategory: "theater",
+    color: "orange",
+  },
+  {
+    subcategory: "transport",
+    color: "blue",
+  },
+  {
+    subcategory: "wellbeing",
+    color: "crimson",
+  },
+];
+
+//  let backgroundColor;
+//       switch (subcategory) {
+//         case "emergency":
+//           backgroundColor = redDark.red9;
+//           break;
+//         case "fnb":
+//           backgroundColor = yellowDark.yellow9;
+//           break;
+//         case "generic":
+//           backgroundColor = grayDark.gray9;
+
+//           break;
+//         case "mobility":
+//           backgroundColor = cyanDark.cyan9;
+//           break;
+//         case "restroom":
+//           backgroundColor = violetDark.violet9;
+//           break;
+//         case "service":
+//           backgroundColor = indigoDark.indigo9;
+//           break;
+//         case "sports":
+//           backgroundColor = grassDark.grass9;
+//           break;
+//         case "theater":
+//           backgroundColor = orangeDark.orange9;
+//           break;
+//         case "transport":
+//           backgroundColor = blueDark.blue9;
+//           break;
+//         case "wellbeing":
+//           backgroundColor = crimsonDark.crimson9;
+//           break;
+//         default:
+//           backgroundColor = grayDark.gray9;
+//           break;
+//       }
 
 // F&R query:
 // "(Icon.*?)",

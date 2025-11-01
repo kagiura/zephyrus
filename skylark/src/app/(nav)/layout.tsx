@@ -1,6 +1,6 @@
 "use client";
 import { Card, ScrollArea } from "@radix-ui/themes";
-import { useGeolocation } from "@uidotdev/usehooks";
+import { useDebounce, useGeolocation } from "@uidotdev/usehooks";
 import Head from "next/head";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MapProvider } from "react-map-gl/mapbox";
@@ -80,6 +80,8 @@ export default function Page({
 					loaded={mapLoaded}
 					pushAwayCard={pushAwayCard}
 					pullBackCard={pullBackCard}
+					lng={lng}
+					lat={lat}
 				>
 					<ScrollArea
 						type="always"

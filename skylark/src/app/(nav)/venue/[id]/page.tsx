@@ -44,7 +44,8 @@ export default function Venue() {
 		}
 		flyTo(
 			(unit.properties.display_point?.coordinates as [number, number]) ||
-				pointOnFeature(unit.geometry),
+				pointOnFeature(unit.geometry).geometry.coordinates,
+			20,
 		);
 		setFocusedUnitIDs([unit.id]);
 		pullBackCard();

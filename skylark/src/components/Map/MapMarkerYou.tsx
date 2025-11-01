@@ -1,3 +1,5 @@
+"use client";
+
 import { booleanPointInPolygon } from "@turf/boolean-point-in-polygon";
 import { useEffect, useMemo, useState } from "react";
 import { Marker } from "react-map-gl/mapbox";
@@ -7,10 +9,15 @@ import styles from "./MapMarkerYou.module.css";
 import { SINGAPORE_BOUNDS } from "@/data/singaporeBounds";
 import { useMapState } from "@/utils/mapState";
 import useLocation from "@/utils/useLocation";
+import { usePathname } from "next/navigation";
 
 export default function MapMarkerYou() {
 	const { location, loading } = useLocation();
 	const { flyTo } = useMapState();
+	const pathname = usePathname();
+	const isOnFirstPage = useMemo(() => {
+		return pathname === "/";
+	}, [pathname]);
 
 	const withinBounds = useMemo(() => {
 		if (!location) return false;
@@ -27,6 +34,9 @@ export default function MapMarkerYou() {
 			if (!withinBounds) {
 				// alert("Your location is outside of Singapore. Please allow location access only if you are in Singapore.");
 				setZoomedToUserLocation(true);
+				return;
+			}
+			if (!isOnFirstPage) {
 				return;
 			}
 			flyTo(location);

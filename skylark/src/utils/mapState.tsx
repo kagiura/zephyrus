@@ -1,7 +1,9 @@
+import { DEFAULT_LAT, DEFAULT_LNG } from "@/data/geographicDefaults";
 import { IMDF_AMENITIES, IMDF_UNITS } from "@/data/imdf";
 import isbStops from "@/data/isbStops";
 import { ISBStop } from "@/types/schema";
 import { Amenity, Unit } from "@dazzlegarden/types/imdf";
+import { useDebounce } from "@uidotdev/usehooks";
 import {
 	createContext,
 	useCallback,
@@ -11,6 +13,7 @@ import {
 } from "react";
 import { LngLatLike, useMap } from "react-map-gl/mapbox";
 import { useWindowSize } from "usehooks-ts";
+import { useDodgeUI } from "./useDodgeUI";
 
 export type FocusedSegment = {
 	from: string;
@@ -28,7 +31,7 @@ export type FocusedStop = {
 
 export const MapStateContext = createContext<{
 	loaded: boolean;
-	flyTo: (_: LngLatLike) => void;
+	flyTo: (_: LngLatLike, _z?: number) => void;
 	pushAwayCard: () => void;
 	pullBackCard: () => void;
 	levelOrdinal: number;
@@ -47,6 +50,10 @@ export const MapStateContext = createContext<{
 	setFocusedStops: React.Dispatch<React.SetStateAction<FocusedStop[]>>;
 	setFocusedSegments: React.Dispatch<React.SetStateAction<FocusedSegment[]>>;
 	resetFocusedState: () => void;
+	lng: number;
+	lat: number;
+	debouncedLng: number;
+	debouncedLat: number;
 }>({
 	loaded: false,
 	flyTo: (_: LngLatLike) => {},
@@ -68,6 +75,10 @@ export const MapStateContext = createContext<{
 	focusedStops: [],
 	focusedSegments: [],
 	resetFocusedState: () => {},
+	lng: DEFAULT_LNG,
+	lat: DEFAULT_LAT,
+	debouncedLng: DEFAULT_LNG,
+	debouncedLat: DEFAULT_LAT,
 });
 
 export function useMapState() {
@@ -79,11 +90,15 @@ export function MapStateProvider({
 	loaded,
 	pushAwayCard = () => {},
 	pullBackCard = () => {},
+	lng,
+	lat,
 }: {
 	children: React.ReactNode;
 	loaded: boolean;
 	pushAwayCard: () => void;
 	pullBackCard: () => void;
+	lng: number;
+	lat: number;
 }) {
 	const { map } = useMap();
 
@@ -113,56 +128,25 @@ export function MapStateProvider({
 		[focusedAmenityID],
 	);
 
-	const { width: pageWidth, height: pageHeight } = useWindowSize();
-	const desktop = useMemo(() => pageWidth > 768, [pageWidth]);
-
+	const { dodge } = useDodgeUI();
 	const flyTo = useCallback(
-		(position: LngLatLike) => {
+		(position: LngLatLike, minZoom?: number) => {
 			if (typeof map === "undefined") {
 				// run it again when the map is ready
-				setTimeout(() => flyTo(position), 200);
+				setTimeout(() => flyTo(position, minZoom), 500);
 				return;
 			}
 
 			const zoom = map.getZoom();
-			const targetZoom = Math.max(16, zoom);
-			const zoomAdjustment = Math.pow(2, zoom - targetZoom);
+			const targetZoom = Math.max(minZoom || 16, zoom);
 			// set the map's center to the spotlight point
-
-			const lng = Array.isArray(position)
-				? position[0]
-				: "lon" in position
-					? position.lon
-					: position.lng;
-			const lat = Array.isArray(position) ? position[1] : position.lat;
-
-			if (desktop) {
-				const sidebarWidth = 350 + 16 * 2;
-				// dodge the sidebar by adjusting the lng
-
-				// first, project the center of the map
-				const centerPoint = map.project([lng, lat]);
-				// then, move the point to the left by half the sidebar width
-				const leftPoint = centerPoint.x - (sidebarWidth / 2) * zoomAdjustment;
-				// unproject the new point to get the new latlng
-				const adjustedLng = map.unproject([leftPoint, centerPoint.y]).lng;
-
-				map.flyTo({
-					center: [adjustedLng, lat],
-					zoom: targetZoom,
-				});
-			} else {
-				const footerHeight = pageHeight - (pageHeight * 0.75 - 120);
-				const centerPoint = map.project([lng, lat]);
-				const topPoint = centerPoint.y + (footerHeight / 2) * zoomAdjustment;
-				const adjustedLat = map.unproject([centerPoint.x, topPoint]).lat;
-				map.flyTo({
-					center: [lng, adjustedLat],
-					zoom: targetZoom,
-				});
-			}
+			const adjustedPosition = dodge(position, targetZoom) || position;
+			map.flyTo({
+				center: adjustedPosition,
+				zoom: targetZoom,
+			});
 		},
-		[desktop, map, pageHeight],
+		[map, dodge],
 	);
 
 	const resetFocusedState = useCallback(() => {
@@ -170,6 +154,9 @@ export function MapStateProvider({
 		setFocusedStops([]);
 		setFocusedSegments([]);
 	}, []);
+
+	const debouncedLng = useDebounce(lng, 300);
+	const debouncedLat = useDebounce(lat, 300);
 
 	return (
 		<MapStateContext.Provider
@@ -194,6 +181,10 @@ export function MapStateProvider({
 				setFocusedStops,
 				setFocusedSegments,
 				resetFocusedState,
+				lng,
+				lat,
+				debouncedLng,
+				debouncedLat,
 			}}
 		>
 			{children}
