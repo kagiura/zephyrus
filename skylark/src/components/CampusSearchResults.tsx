@@ -7,6 +7,7 @@ import {
 import isbServices from "@/data/isbServices";
 import { ISBService } from "@/types/schema";
 import formatDistance from "@/utils/formatDistance";
+import useLocation from "@/utils/useLocation";
 import useSearchCampus, { SearchResults } from "@/utils/useSearchCampus";
 import {
 	newImdfCategories,
@@ -37,11 +38,7 @@ export default function CampusSearchResults({
 }: {
 	searchQuery: string;
 }): JSX.Element {
-	const { latitude, longitude, error } = useGeolocation({
-		enableHighAccuracy: true,
-		maximumAge: 1000 * 20, // 20 secs
-	});
-	const isLocationActive = latitude && longitude && !error;
+	const { isLocationActive, latitude, longitude } = useLocation();
 	const { results, loading } = useSearchCampus(searchQuery);
 
 	if (loading) {

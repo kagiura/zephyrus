@@ -6,32 +6,25 @@ import { Marker } from "react-map-gl/mapbox";
 
 import styles from "./MapMarkerYou.module.css";
 
-import { SINGAPORE_BOUNDS } from "@/data/singaporeBounds";
+import { ISB_BOUNDS, SINGAPORE_BOUNDS } from "@/data/bounds";
 import { useMapState } from "@/utils/mapState";
 import useLocation from "@/utils/useLocation";
 import { usePathname } from "next/navigation";
 
 export default function MapMarkerYou() {
-	const { location, loading } = useLocation();
+	const { latitude, longitude, isLocationActive, withinIsbBounds } =
+		useLocation();
 	const { flyTo } = useMapState();
 	const pathname = usePathname();
 	const isOnFirstPage = useMemo(() => {
 		return pathname === "/";
 	}, [pathname]);
 
-	const withinBounds = useMemo(() => {
-		if (!location) return false;
-		return booleanPointInPolygon(
-			[location.lng, location.lat],
-			SINGAPORE_BOUNDS,
-		);
-	}, [location]);
-
 	const [zoomedToUserLocation, setZoomedToUserLocation] = useState(false);
 	// if user's location became available,zoom to user location
 	useEffect(() => {
-		if (!zoomedToUserLocation && location && flyTo) {
-			if (!withinBounds) {
+		if (!zoomedToUserLocation && isLocationActive && flyTo) {
+			if (!withinIsbBounds) {
 				// alert("Your location is outside of Singapore. Please allow location access only if you are in Singapore.");
 				setZoomedToUserLocation(true);
 				return;
@@ -39,16 +32,22 @@ export default function MapMarkerYou() {
 			if (!isOnFirstPage) {
 				return;
 			}
-			flyTo(location);
+			flyTo([longitude, latitude]);
 			setZoomedToUserLocation(true);
 		}
-	}, [location, withinBounds, loading, flyTo, zoomedToUserLocation]);
+	}, [
+		location,
+		withinIsbBounds,
+		isLocationActive,
+		flyTo,
+		zoomedToUserLocation,
+	]);
 
-	if (loading || !location || !withinBounds) {
+	if (!isLocationActive || !withinIsbBounds) {
 		return null;
 	}
 	return (
-		<Marker latitude={location.lat} longitude={location.lng} anchor="center">
+		<Marker latitude={latitude} longitude={longitude} anchor="center">
 			<div className={styles.youMarker} />
 		</Marker>
 	);

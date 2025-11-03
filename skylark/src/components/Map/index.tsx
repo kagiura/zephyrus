@@ -24,9 +24,9 @@ import MapMarkerYou from "./MapMarkerYou";
 import BusLayer from "./BusLayer";
 import IMDFLayer from "./IMDFLayer";
 
+import { SINGAPORE_BOUNDS } from "@/data/bounds";
 import { IMDF_AMENITIES, IMDF_UNITS } from "@/data/imdf";
 import isbStopsGeojson from "@/data/isbStopsGeojson";
-import { SINGAPORE_BOUNDS } from "@/data/singaporeBounds";
 import { useMapState } from "@/utils/mapState";
 
 const MAPBOX_ACCESSTOKEN =

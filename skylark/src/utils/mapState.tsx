@@ -52,8 +52,10 @@ export const MapStateContext = createContext<{
 	resetFocusedState: () => void;
 	lng: number;
 	lat: number;
+	zoom: number;
 	debouncedLng: number;
 	debouncedLat: number;
+	debouncedZoom: number;
 }>({
 	loaded: false,
 	flyTo: (_: LngLatLike) => {},
@@ -77,8 +79,10 @@ export const MapStateContext = createContext<{
 	resetFocusedState: () => {},
 	lng: DEFAULT_LNG,
 	lat: DEFAULT_LAT,
+	zoom: 16,
 	debouncedLng: DEFAULT_LNG,
 	debouncedLat: DEFAULT_LAT,
+	debouncedZoom: 16,
 });
 
 export function useMapState() {
@@ -92,6 +96,7 @@ export function MapStateProvider({
 	pullBackCard = () => {},
 	lng,
 	lat,
+	zoom,
 }: {
 	children: React.ReactNode;
 	loaded: boolean;
@@ -99,6 +104,7 @@ export function MapStateProvider({
 	pullBackCard: () => void;
 	lng: number;
 	lat: number;
+	zoom: number;
 }) {
 	const { map } = useMap();
 
@@ -157,6 +163,7 @@ export function MapStateProvider({
 
 	const debouncedLng = useDebounce(lng, 300);
 	const debouncedLat = useDebounce(lat, 300);
+	const debouncedZoom = useDebounce(zoom, 300);
 
 	return (
 		<MapStateContext.Provider
@@ -183,8 +190,10 @@ export function MapStateProvider({
 				resetFocusedState,
 				lng,
 				lat,
+				zoom,
 				debouncedLng,
 				debouncedLat,
+				debouncedZoom,
 			}}
 		>
 			{children}

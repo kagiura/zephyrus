@@ -1,100 +1,108 @@
 // react hook to get user's current location
-
+import { ISB_BOUNDS, NUS_CAMPUS_BOUNDS, SINGAPORE_BOUNDS } from "@/data/bounds";
+import { booleanPointInPolygon } from "@turf/boolean-point-in-polygon";
 import { useGeolocation } from "@uidotdev/usehooks";
+import { useMemo } from "react";
 
-// interface GeolocationPositionError {
-// 	message: string;
-// }
+const IT_LAT = 1.29731;
+const IT_LNG = 103.77281;
 
-// interface GeolocationPosition {
-// 	coords: {
-// 		latitude: number;
-// 		longitude: number;
-// 	};
-// }
+const DEFUALT_LOCATION = {
+	// lat: IT_LAT,
+	// lng: IT_LNG,
+	// latitude: IT_LAT,
+	// longitude: IT_LNG,
+};
 
-type Location =
+type LocationDetails = {
+	withinSingaporeBounds: boolean;
+	withinNusBounds: boolean;
+	withinIsbBounds: boolean;
+};
+
+type Location = (
 	| {
-			location: null;
+			isLocationActive: false;
 			timestamp: null;
 			error: null;
 			loading: true;
+			lat: undefined;
+			lng: undefined;
+			latitude: undefined;
+			longitude: undefined;
 	  }
 	| {
-			location: {
-				lat: number;
-				lng: number;
-			};
+			isLocationActive: true;
 			timestamp: number;
 			error: false;
 			loading: false;
+			lat: number;
+			lng: number;
+			latitude: number;
+			longitude: number;
 	  }
 	| {
-			location: null;
+			isLocationActive: false;
 			timestamp: null;
 			error: GeolocationPositionError;
 			loading: false;
-	  };
+			lat: undefined;
+			lng: undefined;
+			latitude: undefined;
+			longitude: undefined;
+	  }
+) &
+	LocationDetails;
 
 // wrapper for useGeoLocation
 export default function useLocation() {
-	// const [loading, setLoading] = useState(true);
-	// const [location, setLocation] = useState<{ lat: number; lng: number } | null>(
-	// 	null,
-	// );
-	// const [error, setError] = useState<GeolocationPositionError | null>(null);
-
-	// // above, but keep watching for location changes
-	// useEffect(() => {
-	// 	if (!navigator.geolocation) {
-	// 		setError({ message: "Geolocation is not supported" });
-	// 		return;
-	// 	}
-
-	// 	function getLocation() {
-	// 		function success(position: GeolocationPosition) {
-	// 			setLocation({
-	// 				lat: position.coords.latitude,
-	// 				lng: position.coords.longitude,
-	// 			});
-	// 			setLoading(false);
-	// 		}
-
-	// 		function failure(error: GeolocationPositionError) {
-	// 			setError(error);
-	// 			setLoading(false);
-	// 		}
-
-	// 		const watchId = navigator.geolocation.watchPosition(success, failure);
-	// 		return watchId;
-	// 	}
-
-	// 	let watchId = getLocation();
-
-	// 	setTimeout(
-	// 		() => {
-	// 			navigator.geolocation.clearWatch(watchId);
-	// 			const newWatchId = getLocation();
-	// 			watchId = newWatchId;
-	// 		},
-	// 		1000 * 60 * 1,
-	// 	); // every 1 minutes
-
-	// 	return () => {
-	// 		navigator.geolocation.clearWatch(watchId);
-	// 	};
-	// }, []);
-
-	const { latitude, longitude, error, timestamp, loading } = useGeolocation({
+	const {
+		// latitude, longitude,
+		error,
+		timestamp,
+		loading,
+	} = useGeolocation({
 		enableHighAccuracy: true,
 		maximumAge: 1000 * 20, // 20 secs
 	});
+
+	const [latitude, longitude] = [1.2951672158718233, 103.77116009853599];
+	// const latitude = IT_LAT;
+	// const longitude = IT_LNG;
+
+	const withinSingaporeBounds = useMemo(() => {
+		if (!latitude || !longitude) return false;
+		return booleanPointInPolygon([longitude, latitude], SINGAPORE_BOUNDS);
+	}, [latitude, longitude]);
+
+	const withinNusBounds = useMemo(() => {
+		if (!latitude || !longitude) return false;
+		return (
+			NUS_CAMPUS_BOUNDS.features.findIndex((f) => {
+				return booleanPointInPolygon([longitude, latitude], f);
+			}) !== -1
+		);
+	}, [latitude, longitude]);
+
+	const withinIsbBounds = useMemo(() => {
+		if (!latitude || !longitude) return false;
+		return (
+			ISB_BOUNDS.features.findIndex((f) => {
+				return booleanPointInPolygon([longitude, latitude], f);
+			}) !== -1
+		);
+	}, [latitude, longitude]);
+
 	if (loading) {
 		return {
-			location: null,
+			isLocationActive: false,
 			error: null,
 			loading,
 			timestamp: null,
+			withinSingaporeBounds,
+			withinNusBounds,
+			withinIsbBounds,
+			...DEFUALT_LOCATION,
 		} as Location;
 	}
 	if (error || !latitude || !longitude || !timestamp) {
@@ -104,20 +112,28 @@ export default function useLocation() {
 			timestamp,
 		});
 		return {
-			location: null,
+			isLocationActive: false,
 			error,
 			loading,
 			timestamp,
+			withinSingaporeBounds,
+			withinNusBounds,
+			withinIsbBounds,
+			...DEFUALT_LOCATION,
 		} as Location;
 	}
 
 	return {
-		location: {
-			lat: latitude,
-			lng: longitude,
-		},
+		isLocationActive: true,
 		error: false,
 		loading,
 		timestamp,
+		withinSingaporeBounds,
+		withinNusBounds,
+		withinIsbBounds,
+		lat: latitude,
+		lng: longitude,
+		latitude,
+		longitude,
 	} as Location;
 }

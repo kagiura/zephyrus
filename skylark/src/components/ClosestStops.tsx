@@ -1,5 +1,4 @@
 import { Badge, Box, Heading, Inset, Text } from "@radix-ui/themes";
-import { useGeolocation } from "@uidotdev/usehooks";
 import { Accordion } from "radix-ui";
 import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
@@ -7,48 +6,45 @@ import { useLocalStorage } from "usehooks-ts";
 import styles from "./ClosestStops.module.css";
 import StopTimings from "./StopTimings";
 
-import { DEFAULT_LAT, DEFAULT_LNG } from "@/data/geographicDefaults";
 import { ISBStop } from "@/types/schema";
 import formatDistance from "@/utils/formatDistance";
 import getClosestStops from "@/utils/getClosestStops";
+import useLocation from "@/utils/useLocation";
+import { motion } from "motion/react";
 
-const IT_LAT = 1.29731;
-const IT_LNG = 103.77281;
 export default function ClosestStops() {
-	const { latitude, longitude, error, loading } = useGeolocation({
-		enableHighAccuracy: true,
-		maximumAge: 1000 * 20, // 20 secs
-	});
+	const { latitude, longitude, error, isLocationActive, withinNusBounds } =
+		useLocation();
 	const [closestStops, setClosestStops] = useLocalStorage<
 		(ISBStop & { distance: number })[]
 	>("closest", []);
-	// const closestStops = useMemo(() => {
-	// 	if (!currentLocation) return [];
-	// 	return getClosestStops(currentLocation.lat, currentLocation.lng);
-	// }, [currentLocation]);
 
 	// if user's location became available,zoom to user location
 	useEffect(() => {
-		if (!latitude || !longitude || loading || error) return;
+		if (!isLocationActive) return;
 		setClosestStops(getClosestStops(latitude, longitude));
-	}, [latitude, longitude, loading]);
+	}, [latitude, longitude, isLocationActive]);
 
-	if (error || (!loading && (!latitude || !longitude))) {
+	if (error) {
 		return (
-			<Box>
-				<Heading as="h2" size={{ initial: "6", sm: "7" }} mb="3" mt="4">
-					Closest stops
-				</Heading>
+			<ClosestStopsTitleWrapper>
 				<Text>Unable to retrieve your location.</Text>
-			</Box>
+			</ClosestStopsTitleWrapper>
+		);
+	}
+	if (!withinNusBounds) {
+		return (
+			<ClosestStopsTitleWrapper>
+				<Text>
+					Your location is outside the NUS campus. Search for an ISB stop with
+					the search bar above.
+				</Text>
+			</ClosestStopsTitleWrapper>
 		);
 	}
 
 	return (
-		<>
-			<Heading as="h2" size={{ initial: "6", sm: "7" }} mb="3" mt="4">
-				Closest stops
-			</Heading>
+		<ClosestStopsTitleWrapper>
 			<Accordion.Root
 				type="multiple"
 				key={closestStops
@@ -88,6 +84,26 @@ export default function ClosestStops() {
 						// </Box>
 					))}
 			</Accordion.Root>
-		</>
+		</ClosestStopsTitleWrapper>
+	);
+}
+
+function ClosestStopsTitleWrapper({ children }: { children: React.ReactNode }) {
+	return (
+		<Box
+			mb="2"
+			asChild
+			style={{
+				// contain all margins of children in this box to avoid layout shift
+				overflow: "visible",
+			}}
+		>
+			<motion.div layout>
+				<Heading as="h2" size={{ initial: "6", sm: "7" }} mb="3" mt="4">
+					Closest stops
+				</Heading>
+				{children}
+			</motion.div>
+		</Box>
 	);
 }

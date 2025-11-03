@@ -5,14 +5,12 @@ import {
 	IMDF_UNITS,
 } from "@/data/imdf";
 import isbStops from "@/data/isbStops";
-import { ISBStop } from "@/types/schema";
-import { Amenity, Occupant, Unit } from "@dazzlegarden/types/imdf";
 import distance from "@turf/distance";
 import pointToPolygonDistance from "@turf/point-to-polygon-distance";
-import { useGeolocation } from "@uidotdev/usehooks";
 import Fuse, { FuseResult } from "fuse.js";
 import { useMemo } from "react";
 import { useDebounceValue } from "usehooks-ts";
+import useLocation from "./useLocation";
 
 const searchData = [
 	...IMDF_UNITS.features.map((feature) => ({ type: "unit" as const, feature })),
@@ -46,11 +44,7 @@ export default function useSearchCampus(
 	query: string,
 	filter: (item: SearchableItem) => boolean = () => true,
 ) {
-	const { latitude, longitude, error } = useGeolocation({
-		enableHighAccuracy: true,
-		maximumAge: 1000 * 20, // 20 secs
-	});
-	const isLocationActive = latitude && longitude && !error;
+	const { latitude, longitude, isLocationActive } = useLocation();
 
 	const [debouncedQuery] = useDebounceValue(query, 250);
 

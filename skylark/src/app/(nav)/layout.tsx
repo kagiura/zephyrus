@@ -82,6 +82,7 @@ export default function Page({
 					pullBackCard={pullBackCard}
 					lng={lng}
 					lat={lat}
+					zoom={zoom}
 				>
 					<ScrollArea
 						type="always"

@@ -1,9 +1,10 @@
 "use client";
-import { TextField } from "@radix-ui/themes";
+import { Box, Flex, TextField } from "@radix-ui/themes";
 
 import CampusSearchResults from "@/components/CampusSearchResults";
 import ClosestBuilding from "@/components/ClosestBuilding";
 import ClosestStops from "@/components/ClosestStops";
+import { LayoutGroup } from "motion/react";
 import { useState } from "react";
 
 export default function Page() {
@@ -19,10 +20,12 @@ export default function Page() {
 			{searchQuery ? (
 				<CampusSearchResults searchQuery={searchQuery} />
 			) : (
-				<>
-					<ClosestBuilding />
-					<ClosestStops />
-				</>
+				<Flex direction="column" gap="0" mt="4">
+					<LayoutGroup>
+						<ClosestBuilding />
+						<ClosestStops />
+					</LayoutGroup>
+				</Flex>
 			)}
 		</>
 	);
